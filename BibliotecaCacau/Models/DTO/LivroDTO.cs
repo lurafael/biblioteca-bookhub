@@ -1,6 +1,6 @@
-﻿using BibliotecaCacau.Models.Entities;
+﻿using BibliotecaBookHub.Models.Entities;
 
-namespace BibliotecaCacau.Models.DTO
+namespace BibliotecaBookHub.Models.DTO
 {
     public class LivroDTO : BaseEntity
     {

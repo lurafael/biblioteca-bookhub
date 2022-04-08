@@ -1,4 +1,4 @@
-﻿@model BibliotecaCacau.Models.DTO.LivroDTO
+﻿@model BibliotecaBookHub.Models.DTO.LivroDTO
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,16 +6,10 @@
 
 <h1>Deletar Livro</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja retirar esse livro?</h3>
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>

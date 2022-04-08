@@ -1,4 +1,4 @@
-﻿using BibliotecaCacau.Models;
+﻿using BibliotecaBookHub.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaCacau.Controllers
+namespace BibliotecaBookHub.Controllers
 {
     public class HomeController : Controller
     {

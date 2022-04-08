@@ -1,12 +1,12 @@
-﻿using BibliotecaCacau.Models.Contracts.Services;
-using BibliotecaCacau.Models.DTO;
+﻿using BibliotecaBookHub.Models.Contracts.Services;
+using BibliotecaBookHub.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaCacau.Controllers
+namespace BibliotecaBookHub.Controllers
 {
     public class LivroController : Controller
     {

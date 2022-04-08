@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaCacau.Models.Entities
+namespace BibliotecaBookHub.Models.Entities
 {
     public abstract class BaseEntity
     {

@@ -1,9 +1,9 @@
-﻿using BibliotecaCacau.Models.DTO;
-using BibliotecaCacau.Models.Repositories;
+﻿using BibliotecaBookHub.Models.DTO;
+using BibliotecaBookHub.Models.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BibliotecaCacau.Models.Contracts.Repositories
+namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
     public class LivroRepository : ILivroRepository
     {
