@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BibliotecaBookHub.Models.Repositories
+namespace BibliotecaBookHub.Models.Contexts
 {
     public class ContextDataFake : IContextData
     {
