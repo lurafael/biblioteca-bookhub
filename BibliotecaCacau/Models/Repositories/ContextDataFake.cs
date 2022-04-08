@@ -1,10 +1,10 @@
-﻿using BibliotecaCacau.Models.Contracts;
-using BibliotecaCacau.Models.DTO;
+﻿using BibliotecaBookHub.Models.Contracts;
+using BibliotecaBookHub.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BibliotecaCacau.Models.Repositories
+namespace BibliotecaBookHub.Models.Repositories
 {
     public class ContextDataFake : IContextData
     {

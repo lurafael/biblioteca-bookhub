@@ -1,7 +1,7 @@
-﻿using BibliotecaCacau.Models.DTO;
+﻿using BibliotecaBookHub.Models.DTO;
 using System.Collections.Generic;
 
-namespace BibliotecaCacau.Models.Contracts.Repositories
+namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
     public interface ILivroRepository
     {

@@ -1,7 +1,7 @@
-using BibliotecaCacau.Models.Contracts;
-using BibliotecaCacau.Models.Contracts.Repositories;
-using BibliotecaCacau.Models.Contracts.Services;
-using BibliotecaCacau.Models.Repositories;
+using BibliotecaBookHub.Models.Contracts;
+using BibliotecaBookHub.Models.Contracts.Repositories;
+using BibliotecaBookHub.Models.Contracts.Services;
+using BibliotecaBookHub.Models.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaCacau
+namespace BibliotecaBookHub
 {
     public class Startup
     {

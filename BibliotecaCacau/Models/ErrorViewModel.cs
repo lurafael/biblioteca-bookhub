@@ -1,6 +1,6 @@
 using System;
 
-namespace BibliotecaCacau.Models
+namespace BibliotecaBookHub.Models
 {
     public class ErrorViewModel
     {

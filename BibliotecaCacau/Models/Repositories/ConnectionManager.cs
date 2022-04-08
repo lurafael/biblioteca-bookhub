@@ -1,4 +1,4 @@
-﻿using BibliotecaCacau.Models.Contracts.Repositories;
+﻿using BibliotecaBookHub.Models.Contracts.Repositories;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaCacau.Models.Repositories
+namespace BibliotecaBookHub.Models.Repositories
 {
     public class ConnectionManager : IConnectionManager
     {
