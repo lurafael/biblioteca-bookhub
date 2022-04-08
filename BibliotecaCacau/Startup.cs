@@ -1,7 +1,7 @@
 using BibliotecaBookHub.Models.Contracts;
 using BibliotecaBookHub.Models.Contracts.Repositories;
 using BibliotecaBookHub.Models.Contracts.Services;
-using BibliotecaBookHub.Models.Repositories;
+using BibliotecaBookHub.Models.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,10 +28,28 @@ namespace BibliotecaBookHub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IContextData, ContextDataFake>();
-            services.AddSingleton<IConnectionManager, ConnectionManager>();
+
+
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<ILivroService, LivroService>();
+
+            ConfigureDataSource(services);
+        }
+
+        public void ConfigureDataSource(IServiceCollection services)
+        {
+            var dataSource = Configuration["DataSource"];
+
+            switch(dataSource)
+            {
+                case "Local":
+                    services.AddSingleton<IContextData, ContextDataFake>();
+                    break;
+                case "SqlServer":
+                    services.AddSingleton<IContextData, ContextDataSqlServer>();
+                    services.AddSingleton<IConnectionManager, ConnectionManager>();
+                    break;
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

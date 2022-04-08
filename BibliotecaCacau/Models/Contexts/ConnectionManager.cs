@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BibliotecaBookHub.Models.Repositories
+namespace BibliotecaBookHub.Models.Contexts
 {
     public class ConnectionManager : IConnectionManager
     {
