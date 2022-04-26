@@ -18,5 +18,13 @@ namespace BibliotecaBookHub.Models.DTO
             Autor = autor;
             Editora = editora;
         }
+
+        public LivroDTO(string id, string nome, string autor, string editora)
+        {
+            Id = id;
+            Nome = nome;
+            Autor = autor;
+            Editora = editora;
+        }
     }
 }

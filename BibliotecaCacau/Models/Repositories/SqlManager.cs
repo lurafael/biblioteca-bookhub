@@ -30,12 +30,12 @@ namespace BibliotecaBookHub.Models.Repositories
                             "WHERE ID = @id";
                     break;
                 case TSql.ATUALIZAR_LIVRO:
-                    query = "UPDATE LIVRO" + 
-                            "SET NOME = @nome, AUTOR = @autor, EDITORA = @editora" +
+                    query = "UPDATE LIVRO " + 
+                            "SET NOME = @nome, AUTOR = @autor, EDITORA = @editora " +
                             "WHERE ID = @id";
                     break;
                 case TSql.EXCLUIR_LIVRO:
-                    query = "DELETE FROM LIVRO" +
+                    query = "DELETE FROM LIVRO " +
                             "WHERE ID = @id";
                     break;
             }
