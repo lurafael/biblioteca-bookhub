@@ -162,12 +162,12 @@ namespace BibliotecaBookHub.Models.Contexts
                 {
                     var colunas = row.ItemArray;
 
-                    var id = colunas[0].ToString();
+                    var codigo = colunas[0].ToString();
                     var nome = colunas[1].ToString();
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
 
-                    livro = new LivroDTO(id, nome, autor, editora);
+                    livro = new LivroDTO(codigo, nome, autor, editora);
                 }
 
                 adapter = null;
