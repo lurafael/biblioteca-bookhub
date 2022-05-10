@@ -46,6 +46,7 @@ namespace BibliotecaBookHub.Controllers
         {
             try
             {
+                livro.StatusLivroId = 1;
                 _livroService.Cadastrar(livro);
                 return RedirectToAction("List");
             }
