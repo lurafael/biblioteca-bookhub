@@ -3,9 +3,8 @@ using BibliotecaCacau.Models.Entities;
 
 namespace BibliotecaBookHub.Models.DTO
 {
-    public class LivroDTO 
+    public class LivroDTO : BaseEntity
     {
-        public string Id { get; set; }
         public string Nome { get; set; }
         public string Autor { get; set; }
         public string Editora { get; set; }

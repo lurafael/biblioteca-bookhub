@@ -1,7 +1,5 @@
-﻿using BibliotecaBookHub.Models.DTO;
-using BibliotecaBookHub.Models.Repositories;
+﻿using BibliotecaCacau.Models.Entities;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
@@ -14,27 +12,27 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
             _contextData = contextData;
         }
 
-        public void Atualizar(LivroDTO livro)
+        public void Atualizar(Livro livro)
         {
             _contextData.AtualizarLivro(livro);
         }
 
-        public void Cadastrar(LivroDTO livro)
+        public void Cadastrar(Livro livro)
         {
             _contextData.CadastrarLivro(livro);
         }
 
-        public void Deletar(LivroDTO livro)
+        public void Deletar(Livro livro)
         {
             _contextData.DeletarLivro(livro.Id);
         }
 
-        public List<LivroDTO> Listar()
+        public List<Livro> Listar()
         {
             return _contextData.ListarLivro();
         }
 
-        public LivroDTO PesquisarPorId(string id)
+        public Livro PesquisarPorId(string id)
         {
             return _contextData.PesquisarLivroPorId(id);
         }

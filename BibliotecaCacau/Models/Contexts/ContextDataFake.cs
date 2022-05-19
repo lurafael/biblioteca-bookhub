@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts;
 using BibliotecaBookHub.Models.DTO;
+using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +9,24 @@ namespace BibliotecaBookHub.Models.Contexts
 {
     public class ContextDataFake : IContextData
     {
-        private static List<LivroDTO> livros;
+        private static List<Livro> livros;
 
         public ContextDataFake()
         {
-            livros = new List<LivroDTO>();
+            livros = new List<Livro>();
             InitializeData();
         }
 
         private static void InitializeData()
         {
-            livros.Add(new LivroDTO { Nome = "Implementando Domain-Driven Design", Autor = "Vaugh Vernon", Editora = "Alta Books" });
-            livros.Add(new LivroDTO { Nome = "Domain-Driven Design", Autor = "Eric Evans", Editora = "Alta Books" });
-            livros.Add(new LivroDTO { Nome = "Redes Guia Prático", Autor = "Carlos E. Morimoto", Editora = "Sul Editores" });
-            livros.Add(new LivroDTO { Nome = "PHP Programando com Orientação a Objetos", Autor = "Pablo Dall'Oglio", Editora = "Novatec" });
-            livros.Add(new LivroDTO { Nome = "Introdução a Programação com Python", Autor = "Nilo N. C. Menezes", Editora = "Novatec" });
+            livros.Add(new Livro { Nome = "Implementando Domain-Driven Design", Autor = "Vaugh Vernon", Editora = "Alta Books" });
+            livros.Add(new Livro { Nome = "Domain-Driven Design", Autor = "Eric Evans", Editora = "Alta Books" });
+            livros.Add(new Livro { Nome = "Redes Guia Prático", Autor = "Carlos E. Morimoto", Editora = "Sul Editores" });
+            livros.Add(new Livro { Nome = "PHP Programando com Orientação a Objetos", Autor = "Pablo Dall'Oglio", Editora = "Novatec" });
+            livros.Add(new Livro { Nome = "Introdução a Programação com Python", Autor = "Nilo N. C. Menezes", Editora = "Novatec" });
         }
 
-        public void AtualizarLivro(LivroDTO livro)
+        public void AtualizarLivro(Livro livro)
         {
             try
             {
@@ -44,7 +45,7 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public void CadastrarLivro(LivroDTO livro)
+        public void CadastrarLivro(Livro livro)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public List<LivroDTO> ListarLivro()
+        public List<Livro> ListarLivro()
         {
             try
             {
@@ -84,7 +85,7 @@ namespace BibliotecaBookHub.Models.Contexts
 
         }
 
-        public LivroDTO PesquisarLivroPorId(string id)
+        public Livro PesquisarLivroPorId(string id)
         {
             try
             {

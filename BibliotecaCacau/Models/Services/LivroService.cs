@@ -18,7 +18,8 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         {
             try
             {
-                _livroRepository.Deletar(livro);
+                var objLivro = livro.ConverterParaEntidade();
+                _livroRepository.Deletar(objLivro);
             }
             catch (Exception ex)
             {
@@ -30,7 +31,8 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         {
             try
             {
-                _livroRepository.Atualizar(livro);
+                var objLivro = livro.ConverterParaEntidade();
+                _livroRepository.Atualizar(objLivro);
             }
             catch (Exception ex)
             {
@@ -42,7 +44,9 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         {
             try
             {
-                _livroRepository.Cadastrar(livro);
+                var objLivro = livro.ConverterParaEntidade();
+                objLivro.Cadastrar();
+                _livroRepository.Cadastrar(objLivro);
             }
             catch (Exception ex)
             {
@@ -54,7 +58,15 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         {
             try
             {
-                return _livroRepository.Listar();
+                var livrosDTO = new List<LivroDTO>();
+                var livros = _livroRepository.Listar();
+
+                foreach(var item in livros)
+                {
+                    livrosDTO.Add(item.ConverterParaDTO());
+                }
+
+                return livrosDTO;
             }
             catch(Exception ex)
             {
@@ -66,7 +78,8 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         {
             try
             {
-                return _livroRepository.PesquisarPorId(id);
+                var livro = _livroRepository.PesquisarPorId(id);
+                return livro.ConverterParaDTO();
             }
             catch (Exception ex)
             {

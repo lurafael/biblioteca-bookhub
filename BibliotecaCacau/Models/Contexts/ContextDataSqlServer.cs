@@ -3,12 +3,11 @@ using BibliotecaBookHub.Models.Contracts.Repositories;
 using BibliotecaBookHub.Models.DTO;
 using BibliotecaBookHub.Models.Enums;
 using BibliotecaBookHub.Models.Repositories;
+using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BibliotecaBookHub.Models.Contexts
 {
@@ -21,7 +20,7 @@ namespace BibliotecaBookHub.Models.Contexts
             _connection = connectionManager.GetConnection();
         }
 
-        public void AtualizarLivro(LivroDTO livro)
+        public void AtualizarLivro(Livro livro)
         {
             try
             {
@@ -49,7 +48,7 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public void CadastrarLivro(LivroDTO livro)
+        public void CadastrarLivro(Livro livro)
         {
             try
             {
@@ -61,7 +60,7 @@ namespace BibliotecaBookHub.Models.Contexts
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = livro.Nome;
                 command.Parameters.Add("@autor", SqlDbType.VarChar).Value = livro.Autor;
                 command.Parameters.Add("@editora", SqlDbType.VarChar).Value = livro.Editora;
-                command.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = livro.StatusLivroId;
+                command.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = livro.StatusLivro.GetHashCode();
 
                 command.ExecuteNonQuery();
             } 
@@ -102,9 +101,9 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public List<LivroDTO> ListarLivro()
+        public List<Livro> ListarLivro()
         {
-            var livros = new List<LivroDTO>();
+            var livros = new List<Livro>();
             try
             {
                 var query = SqlManager.GetSql(TSql.LISTAR_LIVRO);
@@ -123,7 +122,7 @@ namespace BibliotecaBookHub.Models.Contexts
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
 
-                    var livro = new LivroDTO {Id = id, Nome = nome, Autor = autor, Editora = editora };
+                    var livro = new Livro {Id = id, Nome = nome, Autor = autor, Editora = editora };
                     livros.Add(livro);
                 }
 
@@ -145,11 +144,11 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public LivroDTO PesquisarLivroPorId(string id)
+        public Livro PesquisarLivroPorId(string id)
         {
             try
             {
-                LivroDTO livro = null;
+                Livro livro = null;
                 var query = SqlManager.GetSql(TSql.PESQUISAR_LIVRO);
                 var command = new SqlCommand(query, _connection);
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
@@ -168,7 +167,7 @@ namespace BibliotecaBookHub.Models.Contexts
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
 
-                    livro = new LivroDTO { Id = id, Nome = nome, Autor = autor, Editora = editora };
+                    livro = new Livro { Id = id, Nome = nome, Autor = autor, Editora = editora };
                 }
 
                 adapter = null;
