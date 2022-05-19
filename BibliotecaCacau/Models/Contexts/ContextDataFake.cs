@@ -18,11 +18,11 @@ namespace BibliotecaBookHub.Models.Contexts
 
         private static void InitializeData()
         {
-            livros.Add(new LivroDTO("Implementando Domain-Driven Design", "Vaugh Vernon", "Alta Books"));
-            livros.Add(new LivroDTO("Domain-Driven Design", "Eric Evans", "Alta Books"));
-            livros.Add(new LivroDTO("Redes Guia Prático", "Carlos E. Morimoto", "Sul Editores"));
-            livros.Add(new LivroDTO("PHP Programando com Orientação a Objetos", "Pablo Dall'Oglio", "Novatec"));
-            livros.Add(new LivroDTO("Introdução a Programação com Python", "Nilo N. C. Menezes", "Novatec"));
+            livros.Add(new LivroDTO { Nome = "Implementando Domain-Driven Design", Autor = "Vaugh Vernon", Editora = "Alta Books" });
+            livros.Add(new LivroDTO { Nome = "Domain-Driven Design", Autor = "Eric Evans", Editora = "Alta Books" });
+            livros.Add(new LivroDTO { Nome = "Redes Guia Prático", Autor = "Carlos E. Morimoto", Editora = "Sul Editores" });
+            livros.Add(new LivroDTO { Nome = "PHP Programando com Orientação a Objetos", Autor = "Pablo Dall'Oglio", Editora = "Novatec" });
+            livros.Add(new LivroDTO { Nome = "Introdução a Programação com Python", Autor = "Nilo N. C. Menezes", Editora = "Novatec" });
         }
 
         public void AtualizarLivro(LivroDTO livro)

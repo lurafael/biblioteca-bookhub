@@ -123,7 +123,7 @@ namespace BibliotecaBookHub.Models.Contexts
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
 
-                    var livro = new LivroDTO(id, nome, autor, editora);
+                    var livro = new LivroDTO {Id = id, Nome = nome, Autor = autor, Editora = editora };
                     livros.Add(livro);
                 }
 
@@ -168,7 +168,7 @@ namespace BibliotecaBookHub.Models.Contexts
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
 
-                    livro = new LivroDTO(codigo, nome, autor, editora);
+                    livro = new LivroDTO { Id = id, Nome = nome, Autor = autor, Editora = editora };
                 }
 
                 adapter = null;
