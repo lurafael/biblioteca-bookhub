@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts;
 using BibliotecaBookHub.Models.DTO;
+using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +9,29 @@ namespace BibliotecaBookHub.Models.Contexts
 {
     public class ContextDataFake : IContextData
     {
-        private static List<LivroDTO> livros;
+        private static List<Livro> livros;
 
         public ContextDataFake()
         {
-            livros = new List<LivroDTO>();
+            livros = new List<Livro>();
             InitializeData();
         }
 
         private static void InitializeData()
         {
-            livros.Add(new LivroDTO("Implementando Domain-Driven Design", "Vaugh Vernon", "Alta Books"));
-            livros.Add(new LivroDTO("Domain-Driven Design", "Eric Evans", "Alta Books"));
-            livros.Add(new LivroDTO("Redes Guia Prático", "Carlos E. Morimoto", "Sul Editores"));
-            livros.Add(new LivroDTO("PHP Programando com Orientação a Objetos", "Pablo Dall'Oglio", "Novatec"));
-            livros.Add(new LivroDTO("Introdução a Programação com Python", "Nilo N. C. Menezes", "Novatec"));
+            livros.Add(new Livro { Nome = "Implementando Domain-Driven Design", Autor = "Vaugh Vernon", Editora = "Alta Books" });
+            livros.Add(new Livro { Nome = "Domain-Driven Design", Autor = "Eric Evans", Editora = "Alta Books" });
+            livros.Add(new Livro { Nome = "Redes Guia Prático", Autor = "Carlos E. Morimoto", Editora = "Sul Editores" });
+            livros.Add(new Livro { Nome = "PHP Programando com Orientação a Objetos", Autor = "Pablo Dall'Oglio", Editora = "Novatec" });
+            livros.Add(new Livro { Nome = "Introdução a Programação com Python", Autor = "Nilo N. C. Menezes", Editora = "Novatec" });
         }
 
-        public void AtualizarLivro(LivroDTO livro)
+        public void AtualizarCliente(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarLivro(Livro livro)
         {
             try
             {
@@ -44,7 +50,12 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public void CadastrarLivro(LivroDTO livro)
+        public void CadastrarCliente(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CadastrarLivro(Livro livro)
         {
             try
             {
@@ -54,6 +65,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void DeletarCliente(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void DeletarLivro(string id)
@@ -69,7 +85,12 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public List<LivroDTO> ListarLivro()
+        public List<Cliente> ListarClientes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Livro> ListarLivro()
         {
             try
             {
@@ -84,7 +105,12 @@ namespace BibliotecaBookHub.Models.Contexts
 
         }
 
-        public LivroDTO PesquisarLivroPorId(string id)
+        public Cliente PesquisarClientePorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Livro PesquisarLivroPorId(string id)
         {
             try
             {

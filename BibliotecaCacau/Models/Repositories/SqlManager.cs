@@ -12,20 +12,21 @@ namespace BibliotecaBookHub.Models.Repositories
         {
             var query = "";
 
-            switch(tsql)
+            switch (tsql)
             {
+                #region LIVROS
                 case TSql.CADASTRAR_LIVRO:
                     query = 
-                        "INSERT INTO LIVRO (id, nome, autor, editora) " +
-                        "VALUES (@id, @nome, @autor, @editora)";
+                        "INSERT INTO LIVRO (id, nome, autor, editora, statusLivroId) " +
+                        "VALUES (CONVERT(BINARY(36), @id), @nome, @autor, @editora, @statusLivroId)";
                     break;
                 case TSql.LISTAR_LIVRO:
-                    query = "SELECT * " +
+                    query = "SELECT CONVERT(VARCHAR(36), Id) Id, Nome, Autor, Editora " +
                             "FROM LIVRO " +
                             "ORDER BY NOME";
                     break;
                 case TSql.PESQUISAR_LIVRO:
-                    query = "SELECT * " +
+                    query = "SELECT CONVERT(VARCHAR(36), Id) Id, Nome, Autor, Editora " +
                             "FROM LIVRO " +
                             "WHERE ID = @id";
                     break;
@@ -38,6 +39,34 @@ namespace BibliotecaBookHub.Models.Repositories
                     query = "DELETE FROM LIVRO " +
                             "WHERE ID = @id";
                     break;
+                #endregion
+
+                #region CLIENTES
+                case TSql.CADASTRAR_CLIENTE:
+                    query =
+                        "INSERT INTO CLIENTE (id, nome, cpf, email, fone, statusClienteId) " +
+                        "VALUES (CONVERT(BINARY(36), @id), @nome, @cpf, @email, @fone, @statusLivroId)";
+                    break;
+                case TSql.LISTAR_CLIENTE:
+                    query = "SELECT CONVERT(VARCHAR(36), Id) id, nome, cpf, email, fone, statusClienteId " +
+                            "FROM CLIENTE " +
+                            "ORDER BY NOME";
+                    break;
+                case TSql.PESQUISAR_CLIENTE:
+                    query = "SELECT CONVERT(VARCHAR(36), Id) id, nome, cpf, email, fone, statusClienteId " +
+                            "FROM CLIENTE " +
+                            "WHERE ID = @id";
+                    break;
+                case TSql.ATUALIZAR_CLIENTE:
+                    query = "UPDATE CLIENTE " +
+                            "SET NOME = @nome, CPF = @cpf, EMAIL = @email, FONE = @email " +
+                            "WHERE CONVERT(VARCHAR(36), Id) = @id";
+                    break;
+                case TSql.EXCLUIR_CLIENTE:
+                    query = "DELETE FROM CLIENTE " +
+                            "WHERE CONVERT(VARCHAR(36), Id) = @id";
+                    break;
+                    #endregion
             }
 
             return query;
