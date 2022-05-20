@@ -14,5 +14,11 @@ namespace BibliotecaBookHub.Models.Contracts
         Livro PesquisarLivroPorId(string id);
         void AtualizarLivro(Livro livro);
         void DeletarLivro(string id);
+
+        void CadastrarCliente(Cliente cliente);
+        List<Cliente> ListarClientes();
+        Cliente PesquisarClientePorId(string id);
+        void AtualizarCliente(Cliente cliente);
+        void DeletarCliente(string id);
     }
 }

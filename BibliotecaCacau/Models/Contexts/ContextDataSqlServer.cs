@@ -20,6 +20,34 @@ namespace BibliotecaBookHub.Models.Contexts
             _connection = connectionManager.GetConnection();
         }
 
+        public void AtualizarCliente(Cliente cliente)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.ATUALIZAR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = cliente.Nome;
+                command.Parameters.Add("@email", SqlDbType.VarChar).Value = cliente.Email;
+                command.Parameters.Add("@fone", SqlDbType.VarChar).Value = cliente.Fone;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
         public void AtualizarLivro(Livro livro)
         {
             try
@@ -32,6 +60,36 @@ namespace BibliotecaBookHub.Models.Contexts
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = livro.Nome;
                 command.Parameters.Add("@autor", SqlDbType.VarChar).Value = livro.Autor;
                 command.Parameters.Add("@editora", SqlDbType.VarChar).Value = livro.Editora;
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public void CadastrarCliente(Cliente cliente)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.CADASTRAR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
+                command.Parameters.Add("@nome", SqlDbType.VarChar).Value = cliente.Nome;
+                command.Parameters.Add("@email", SqlDbType.VarChar).Value = cliente.Email;
+                command.Parameters.Add("@fone", SqlDbType.VarChar).Value = cliente.Fone;
+                command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = cliente.Cpf;
+                command.Parameters.Add("@statusClienteId", SqlDbType.Int).Value = cliente.StatusCliente.GetHashCode();
 
                 command.ExecuteNonQuery();
             }
@@ -77,6 +135,30 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public void DeletarCliente(string id)
+        {
+            try
+            {
+                _connection.Open();
+                var query = SqlManager.GetSql(TSql.EXCLUIR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
         public void DeletarLivro(string id)
         {
             try
@@ -87,6 +169,52 @@ namespace BibliotecaBookHub.Models.Contexts
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
                 command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public List<Cliente> ListarClientes()
+        {
+            var clientes = new List<Cliente>();
+            try
+            {
+                var query = SqlManager.GetSql(TSql.LISTAR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
+                var dataSet = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataSet);
+
+                var rows = dataSet.Tables[0].Rows;
+                foreach (DataRow row in rows)
+                {
+                    var colunas = row.ItemArray;
+
+                    var id = colunas[0].ToString();
+                    var nome = colunas[1].ToString();
+                    var cpf = colunas[2].ToString();
+                    var email = colunas[3].ToString();
+                    var fone = colunas[4].ToString();
+                    var statusClienteId = colunas[5].ToString();
+
+                    var cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, StatusClienteId = Int32.Parse(statusClienteId) };
+                    cliente.StatusCliente = GerenciadorDeStatus.PesquisarStatusDoClientePeloId(cliente.StatusClienteId);
+                    clientes.Add(cliente);
+                }
+
+                adapter = null;
+                dataSet = null;
+
+                return clientes;
             }
             catch (Exception e)
             {
@@ -130,6 +258,53 @@ namespace BibliotecaBookHub.Models.Contexts
                 dataSet = null;
 
                 return livros;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public Cliente PesquisarClientePorId(string id)
+        {
+            try
+            {
+                Cliente cliente = null;
+                var query = SqlManager.GetSql(TSql.PESQUISAR_CLIENTE);
+                var command = new SqlCommand(query, _connection);
+                command.Parameters.Add("@id", SqlDbType.VarChar).Value = id;
+
+                var dataSet = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataSet);
+
+                var rows = dataSet.Tables[0].Rows;
+                foreach (DataRow row in rows)
+                {
+                    var colunas = row.ItemArray;
+
+                    var codigo = colunas[0].ToString();
+                    var nome = colunas[1].ToString();
+                    var cpf = colunas[2].ToString();
+                    var email = colunas[3].ToString();
+                    var fone = colunas[4].ToString();
+                    var statusClienteId = colunas[5].ToString();
+
+                    cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, StatusClienteId = Int32.Parse(statusClienteId) };
+                    cliente.StatusCliente = GerenciadorDeStatus.PesquisarStatusDoClientePeloId(cliente.StatusClienteId);
+                }
+
+                adapter = null;
+                dataSet = null;
+
+                return cliente;
             }
             catch (Exception e)
             {

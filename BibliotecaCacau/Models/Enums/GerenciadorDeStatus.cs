@@ -29,5 +29,25 @@ namespace BibliotecaCacau.Models.Entities
             return status;
         }
 
+        private static List<StatusCliente> statusClienteList = new List<StatusCliente>
+        {
+            StatusCliente.ATIVO,
+            StatusCliente.INATIVO,
+            StatusCliente.SUSPENSO
+        };
+
+        public static StatusCliente PesquisarStatusDoClientePeloId(int id)
+        {
+            var status = statusClienteList.FirstOrDefault(p => p.GetHashCode().Equals(id));
+            return status;
+        }
+
+        public static StatusCliente PesquisarStatusDoClientePeloNome(string nome)
+        {
+            var nomePesquisa = nome.ToUpper().Replace("", "_");
+            var status = statusClienteList.FirstOrDefault(p => p.ToString().Equals(nomePesquisa));
+            return status;
+        }
+
     }
 }

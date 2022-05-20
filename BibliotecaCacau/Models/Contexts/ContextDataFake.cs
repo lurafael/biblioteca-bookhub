@@ -26,6 +26,11 @@ namespace BibliotecaBookHub.Models.Contexts
             livros.Add(new Livro { Nome = "Introdução a Programação com Python", Autor = "Nilo N. C. Menezes", Editora = "Novatec" });
         }
 
+        public void AtualizarCliente(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AtualizarLivro(Livro livro)
         {
             try
@@ -45,6 +50,11 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public void CadastrarCliente(Cliente cliente)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CadastrarLivro(Livro livro)
         {
             try
@@ -55,6 +65,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void DeletarCliente(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public void DeletarLivro(string id)
@@ -70,6 +85,11 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public List<Cliente> ListarClientes()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Livro> ListarLivro()
         {
             try
@@ -83,6 +103,11 @@ namespace BibliotecaBookHub.Models.Contexts
                 throw ex;
             }
 
+        }
+
+        public Cliente PesquisarClientePorId(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public Livro PesquisarLivroPorId(string id)
