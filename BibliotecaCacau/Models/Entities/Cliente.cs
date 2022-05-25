@@ -12,6 +12,12 @@ namespace BibliotecaCacau.Models.Entities
         public int StatusClienteId { get; set; }
         public StatusCliente StatusCliente { get; set; }
 
+        public void Cadastrar()
+        {
+            StatusCliente = StatusCliente.ATIVO;
+            StatusClienteId = StatusCliente.GetHashCode();
+        }
+
         public ClienteDTO ConverterParaDTO()
         {
             return new ClienteDTO

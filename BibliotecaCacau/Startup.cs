@@ -29,7 +29,6 @@ namespace BibliotecaBookHub
         {
             services.AddControllersWithViews();
 
-
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<ILivroService, LivroService>();
 
