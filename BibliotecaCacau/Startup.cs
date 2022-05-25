@@ -28,11 +28,24 @@ namespace BibliotecaBookHub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            services.AddScoped<ILivroRepository, LivroRepository>();
-            services.AddScoped<ILivroService, LivroService>();
+            
+            AddDependenciesRepositories(services);
+            AddDependenciesServices(services);
 
             ConfigureDataSource(services);
+        }
+
+        public void AddDependenciesServices(IServiceCollection services)
+        {
+            services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IClienteService, ClienteService>();
+        }
+
+        public void AddDependenciesRepositories(IServiceCollection services)
+        {
+            services.AddScoped<ILivroRepository, LivroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+
         }
 
         public void ConfigureDataSource(IServiceCollection services)
