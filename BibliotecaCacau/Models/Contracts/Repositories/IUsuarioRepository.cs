@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
-    public interface IClienteRepository : IRepository<Cliente, string>
+    public interface IUsuarioRepository : IRepository<Usuario, int>
     {
     }
 }
