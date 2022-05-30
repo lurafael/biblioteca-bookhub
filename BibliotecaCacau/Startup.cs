@@ -39,12 +39,14 @@ namespace BibliotecaBookHub
         {
             services.AddScoped<ILivroService, LivroService>();
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
         }
 
         public void AddDependenciesRepositories(IServiceCollection services)
         {
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
         }
 

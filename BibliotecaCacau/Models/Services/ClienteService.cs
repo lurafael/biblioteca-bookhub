@@ -14,10 +14,11 @@ namespace BibliotecaBookHub.Models.Contracts.Services
             _clienteRepository = clienteRepository;
         }
 
-        public void Deletar(ClienteDTO cliente)
+        public void Deletar(string Id)
         {
             try
             {
+                var cliente = PesquisarPorId(Id);
                 var objCliente = cliente.ConverterParaEntidade();
                 _clienteRepository.Deletar(objCliente.Id);
             }

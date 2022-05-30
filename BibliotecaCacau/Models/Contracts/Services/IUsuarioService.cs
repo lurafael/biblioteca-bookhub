@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BibliotecaBookHub.Models.Contracts.Services
 {
-    public interface ILivroService : IGenericService<LivroDTO, string>
+    public interface IUsuarioService : IGenericService<UsuarioDTO, int>
     {
     }
 }

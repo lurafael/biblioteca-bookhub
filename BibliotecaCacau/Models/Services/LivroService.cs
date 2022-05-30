@@ -14,10 +14,11 @@ namespace BibliotecaBookHub.Models.Contracts.Services
             _livroRepository = livroRepository;
         }
 
-        public void Deletar(LivroDTO livro)
+        public void Deletar(string Id)
         {
             try
             {
+                var livro = PesquisarPorId(Id);
                 var objLivro = livro.ConverterParaEntidade();
                 _livroRepository.Deletar(objLivro.Id);
             }
