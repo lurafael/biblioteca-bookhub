@@ -505,7 +505,49 @@ namespace BibliotecaBookHub.Models.Contexts
                     var login = colunas[1].ToString();
                     var senha = colunas[2].ToString();
 
-                    usuario = new Usuario { Id = id, Login = login, Senha = senha };
+                    usuario = new Usuario { Id = codigo, Login = login, Senha = senha };
+                }
+
+                adapter = null;
+                dataSet = null;
+
+                return usuario;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public UsuarioDTO EfetuarLogin(UsuarioDTO usuario)
+        {
+            try
+            {
+                var query = SqlManager.GetSql(TSql.EFETUAR_LOGIN);
+                var command = new SqlCommand(query, _connection);
+                command.Parameters.Add("@login", SqlDbType.VarChar).Value = usuario.Login;
+                command.Parameters.Add("@senha", SqlDbType.VarChar).Value = usuario.Senha;
+
+                var dataSet = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataSet);
+
+                var rows = dataSet.Tables[0].Rows;
+                foreach (DataRow row in rows)
+                {
+                    var colunas = row.ItemArray;
+
+                    var codigo = Int32.Parse(colunas[0].ToString());
+                    var login = colunas[1].ToString();
+
+                    usuario = new UsuarioDTO { Id = codigo, Login = login };
                 }
 
                 adapter = null;

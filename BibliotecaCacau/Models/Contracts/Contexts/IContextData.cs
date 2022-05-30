@@ -31,6 +31,7 @@ namespace BibliotecaBookHub.Models.Contracts
         Usuario PesquisarUsuarioPorId(int id);
         void AtualizarUsuario(Usuario usuario);
         void DeletarUsuario(int id);
+        UsuarioDTO EfetuarLogin(UsuarioDTO usuario);
         #endregion
     }
 }

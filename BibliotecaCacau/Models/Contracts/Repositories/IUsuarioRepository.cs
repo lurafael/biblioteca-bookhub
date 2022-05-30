@@ -6,5 +6,6 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
     public interface IUsuarioRepository : IRepository<Usuario, int>
     {
+        UsuarioDTO EfetuarLogin(UsuarioDTO usuario);
     }
 }

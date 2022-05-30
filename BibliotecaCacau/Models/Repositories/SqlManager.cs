@@ -93,7 +93,11 @@ namespace BibliotecaBookHub.Models.Repositories
                     query = "DELETE FROM USUARIO " +
                             "WHERE Id = @id";
                     break;
-                    #endregion
+                case TSql.EFETUAR_LOGIN:
+                    query = "SELECT ID, LOGIN FROM USUARIO " +
+                            "WHERE LOGIN = @login and SENHA = @senha";
+                    break;
+                #endregion
             }
 
             return query;

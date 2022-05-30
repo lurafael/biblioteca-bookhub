@@ -6,5 +6,6 @@ namespace BibliotecaBookHub.Models.Contracts.Services
 {
     public interface IUsuarioService : IGenericService<UsuarioDTO, int>
     {
+        UsuarioDTO EfetuarLogin(UsuarioDTO usuario);
     }
 }

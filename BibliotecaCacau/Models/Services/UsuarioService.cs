@@ -52,6 +52,11 @@ namespace BibliotecaBookHub.Models.Contracts.Services
             }
         }
 
+        public UsuarioDTO EfetuarLogin(UsuarioDTO usuario)
+        {
+            return _usuarioRepository.EfetuarLogin(usuario);
+        }
+
         public List<UsuarioDTO> Listar()
         {
             try

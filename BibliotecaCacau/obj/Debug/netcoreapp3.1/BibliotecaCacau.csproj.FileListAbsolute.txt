@@ -364,3 +364,4 @@ C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\C
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Create.cshtml.g.cs
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Details.cshtml.g.cs
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Delete.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
