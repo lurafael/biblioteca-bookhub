@@ -30,6 +30,7 @@ namespace BibliotecaBookHub.Models.Contexts
 
                 command.Parameters.Add("@id", SqlDbType.VarChar).Value = cliente.Id;
                 command.Parameters.Add("@nome", SqlDbType.VarChar).Value = cliente.Nome;
+                command.Parameters.Add("@cpf", SqlDbType.VarChar).Value = cliente.Cpf;
                 command.Parameters.Add("@email", SqlDbType.VarChar).Value = cliente.Email;
                 command.Parameters.Add("@fone", SqlDbType.VarChar).Value = cliente.Fone;
 
@@ -202,11 +203,11 @@ namespace BibliotecaBookHub.Models.Contexts
                     var id = colunas[0].ToString();
                     var nome = colunas[1].ToString();
                     var cpf = colunas[2].ToString();
-                    var email = colunas[3].ToString();
-                    var fone = colunas[4].ToString();
+                    var fone = colunas[3].ToString();
+                    var email = colunas[4].ToString();
                     var statusClienteId = colunas[5].ToString();
 
-                    var cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, StatusClienteId = Int32.Parse(statusClienteId) };
+                    var cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, Email = email, StatusClienteId = Int32.Parse(statusClienteId) };
                     cliente.StatusCliente = GerenciadorDeStatus.PesquisarStatusDoClientePeloId(cliente.StatusClienteId);
                     clientes.Add(cliente);
                 }
@@ -293,11 +294,11 @@ namespace BibliotecaBookHub.Models.Contexts
                     var codigo = colunas[0].ToString();
                     var nome = colunas[1].ToString();
                     var cpf = colunas[2].ToString();
-                    var email = colunas[3].ToString();
-                    var fone = colunas[4].ToString();
+                    var fone = colunas[3].ToString();
+                    var email = colunas[4].ToString();
                     var statusClienteId = colunas[5].ToString();
 
-                    cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, StatusClienteId = Int32.Parse(statusClienteId) };
+                    cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, Email = email, StatusClienteId = Int32.Parse(statusClienteId) };
                     cliente.StatusCliente = GerenciadorDeStatus.PesquisarStatusDoClientePeloId(cliente.StatusClienteId);
                 }
 

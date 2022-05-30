@@ -25,6 +25,7 @@ namespace BibliotecaCacau.Models.Entities
                 Id = Id,
                 Nome = Nome,
                 Email = Email,
+                Fone = Fone,
                 Cpf = Cpf,
                 StatusClienteId = StatusClienteId.ToString(),
                 Status = GerenciadorDeStatus.PesquisarStatusDoClientePeloId(StatusClienteId).ToString()

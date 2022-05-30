@@ -42,7 +42,7 @@ namespace BibliotecaBookHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Nome, Autor, Editora")] ClienteDTO cliente)
+        public IActionResult Create([Bind("Nome, Cpf, Email, Fone")] ClienteDTO cliente)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace BibliotecaBookHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id, Nome, Autor, Editora")] ClienteDTO cliente)
+        public IActionResult Edit([Bind("Id, Nome, Cpf, Email, Fone")] ClienteDTO cliente)
         {
             if(string.IsNullOrEmpty(cliente.Id))
             {
@@ -125,7 +125,7 @@ namespace BibliotecaBookHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([Bind("Id, Nome, Autor, Editora")] ClienteDTO cliente)
+        public IActionResult Delete([Bind("Nome, Cpf, Email, Fone")] ClienteDTO cliente)
         {
             try
             {

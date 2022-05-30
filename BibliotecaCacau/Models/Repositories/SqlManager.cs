@@ -45,7 +45,7 @@ namespace BibliotecaBookHub.Models.Repositories
                 case TSql.CADASTRAR_CLIENTE:
                     query =
                         "INSERT INTO CLIENTE (id, nome, cpf, email, fone, statusClienteId) " +
-                        "VALUES (CONVERT(BINARY(36), @id), @nome, @cpf, @email, @fone, @statusLivroId)";
+                        "VALUES (CONVERT(BINARY(36), @id), @nome, @cpf, @email, @fone, @statusClienteId)";
                     break;
                 case TSql.LISTAR_CLIENTE:
                     query = "SELECT CONVERT(VARCHAR(36), Id) id, nome, cpf, email, fone, statusClienteId " +
