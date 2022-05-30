@@ -21,9 +21,9 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
             _contextData.CadastrarCliente(cliente);
         }
 
-        public void Deletar(Cliente cliente)
+        public void Deletar(string Id)
         {
-            _contextData.DeletarCliente(cliente.Id);
+            _contextData.DeletarCliente(Id);
         }
 
         public List<Cliente> Listar()

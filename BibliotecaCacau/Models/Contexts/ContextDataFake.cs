@@ -50,6 +50,11 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public void AtualizarUsuario(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CadastrarCliente(Cliente cliente)
         {
             throw new NotImplementedException();
@@ -65,6 +70,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void CadastrarUsuario(Usuario usuario)
+        {
+            throw new NotImplementedException();
         }
 
         public void DeletarCliente(string id)
@@ -83,6 +93,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void DeletarUsuario(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Cliente> ListarClientes()
@@ -105,6 +120,11 @@ namespace BibliotecaBookHub.Models.Contexts
 
         }
 
+        public List<Usuario> ListarUsuarios()
+        {
+            throw new NotImplementedException();
+        }
+
         public Cliente PesquisarClientePorId(string id)
         {
             throw new NotImplementedException();
@@ -120,6 +140,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public Usuario PesquisarUsuarioPorId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

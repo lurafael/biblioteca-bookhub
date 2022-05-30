@@ -66,6 +66,33 @@ namespace BibliotecaBookHub.Models.Repositories
                     query = "DELETE FROM CLIENTE " +
                             "WHERE CONVERT(VARCHAR(36), Id) = @id";
                     break;
+                #endregion
+
+                #region USUÁRIO
+                case TSql.CADASTRAR_USUARIO:
+                    query =
+                        "INSERT INTO USUARIO (LOGIN, SENHA) " +
+                        "VALUES (@login, @senha)";
+                    break;
+                case TSql.LISTAR_USUARIO:
+                    query = "SELECT ID, LOGIN, SENHA " +
+                            "FROM USUARIO " +
+                            "ORDER BY NOME";
+                    break;
+                case TSql.PESQUISAR_USUARIO:
+                    query = "SELECT ID, LOGIN, SENHA " +
+                            "FROM USUARIO " +
+                            "WHERE ID = @id";
+                    break;
+                case TSql.ATUALIZAR_USUARIO:
+                    query = "UPDATE USUARIO " +
+                            "SET SENHA = @senha " +
+                            "WHERE Id = @id";
+                    break;
+                case TSql.EXCLUIR_USUARIO:
+                    query = "DELETE FROM USUARIO " +
+                            "WHERE Id = @id";
+                    break;
                     #endregion
             }
 

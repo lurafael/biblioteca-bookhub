@@ -10,6 +10,6 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
         List<T> Listar();
         T PesquisarPorId(Y id);
         void Atualizar(T entidade);
-        void Deletar(T entidade);
+        void Deletar(Y id);
     }
 }

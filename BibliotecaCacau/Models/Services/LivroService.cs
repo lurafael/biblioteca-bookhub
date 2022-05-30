@@ -19,7 +19,7 @@ namespace BibliotecaBookHub.Models.Contracts.Services
             try
             {
                 var objLivro = livro.ConverterParaEntidade();
-                _livroRepository.Deletar(objLivro);
+                _livroRepository.Deletar(objLivro.Id);
             }
             catch (Exception ex)
             {
