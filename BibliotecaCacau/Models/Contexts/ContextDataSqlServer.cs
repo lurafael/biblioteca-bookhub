@@ -530,6 +530,7 @@ namespace BibliotecaBookHub.Models.Contexts
         {
             try
             {
+                UsuarioDTO result = null;
                 var query = SqlManager.GetSql(TSql.EFETUAR_LOGIN);
                 var command = new SqlCommand(query, _connection);
                 command.Parameters.Add("@login", SqlDbType.VarChar).Value = usuario.Login;
@@ -547,13 +548,13 @@ namespace BibliotecaBookHub.Models.Contexts
                     var codigo = Int32.Parse(colunas[0].ToString());
                     var login = colunas[1].ToString();
 
-                    usuario = new UsuarioDTO { Id = codigo, Login = login };
+                    result = new UsuarioDTO { Id = codigo, Login = login };
                 }
 
                 adapter = null;
                 dataSet = null;
 
-                return usuario;
+                return result;
             }
             catch (Exception e)
             {

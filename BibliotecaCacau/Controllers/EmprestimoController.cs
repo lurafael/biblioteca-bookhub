@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BibliotecaBookHub.Controllers
 {
-    public class UsuarioController : Controller
+    public class EmprestimoController : Controller
     {
         private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(IUsuarioService usuarioService)
+        public EmprestimoController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
@@ -36,7 +36,7 @@ namespace BibliotecaBookHub.Controllers
                     TempData["userLogin"] = resultado.Login;
                     TempData["loginError"] = false;
 
-                    return Redirect("/Emprestimo/Index");
+                    return Redirect("/Home");
                 } else
                 {
                     TempData["loginError"] = true;
@@ -56,7 +56,7 @@ namespace BibliotecaBookHub.Controllers
             TempData["userLogin"] = null;
             TempData["loginError"] = false;
 
-            return Redirect("/Home");
+            return RedirectToAction("/Home");
         }
     }
 }
