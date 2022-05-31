@@ -43,9 +43,8 @@ namespace BibliotecaBookHub.Models.Repositories
 
                 #region CLIENTES
                 case TSql.CADASTRAR_CLIENTE:
-                    query =
-                        "INSERT INTO CLIENTE (id, nome, cpf, email, fone, statusClienteId) " +
-                        "VALUES (CONVERT(BINARY(36), @id), @nome, @cpf, @email, @fone, @statusClienteId)";
+                    query = "INSERT INTO CLIENTE (id, nome, cpf, email, fone, statusClienteId) " +
+                            "VALUES (CONVERT(BINARY(36), @id), @nome, @cpf, @email, @fone, @statusClienteId)";
                     break;
                 case TSql.LISTAR_CLIENTE:
                     query = "SELECT CONVERT(VARCHAR(36), Id) id, nome, cpf, email, fone, statusClienteId " +
@@ -70,9 +69,8 @@ namespace BibliotecaBookHub.Models.Repositories
 
                 #region USUÁRIO
                 case TSql.CADASTRAR_USUARIO:
-                    query =
-                        "INSERT INTO USUARIO (LOGIN, SENHA) " +
-                        "VALUES (@login, @senha)";
+                    query = "INSERT INTO USUARIO (LOGIN, SENHA) " +
+                            "VALUES (@login, @senha)";
                     break;
                 case TSql.LISTAR_USUARIO:
                     query = "SELECT ID, LOGIN, SENHA " +
@@ -98,8 +96,26 @@ namespace BibliotecaBookHub.Models.Repositories
                             "WHERE LOGIN = @login and SENHA = @senha";
                     break;
                 #endregion
-            }
 
+
+                #region Empréstimo de Livros
+                case TSql.EFETUAR_EMPRESTIMO_LIVRO:
+                    query = "INSERT INTO EMPRESTIMOLIVRO (CLIENTEID, USUARIOID, LIVROID, DATAEMPRESTIMO, DATADEVOLUCAO) " +
+                            "VALUES (@clienteId, @usuarioId, @livroId, @dataEmprestimo, @dataDevolucao)";
+                    break;
+                case TSql.EFETUAR_DEVOLUCAO_LIVRO:
+                    query = "UPDATE EMPRESTIMOLIVRO " +
+                            "SET DATADEVOLUCAOEFETIVA = @DATADEVOLUCAOEFETIVA " +
+                            "WHERE CLIENTEID = @clienteId and LIVROID = @livroId";
+                    break;
+                
+                case TSql.ATUALIZAR_STATUS_LIVRO:
+                    query = "UPDATE LIVRO " +
+                            "SET STATUSLIVROID = @statusLivroId " +
+                            "WHERE ID = @id";
+                    break;
+                    #endregion
+            }
             return query;
         }
     }

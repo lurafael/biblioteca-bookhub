@@ -33,5 +33,10 @@ namespace BibliotecaBookHub.Models.Contracts
         void DeletarUsuario(int id);
         UsuarioDTO EfetuarLogin(UsuarioDTO usuario);
         #endregion
+
+        #region Empréstimo
+        void EfetuarEmprestimoLivro(EmprestimoLivro emprestimoLivro);
+        void EfetuarDevolucaoLivro(EmprestimoLivro emprestimoLivro);
+        #endregion
     }
 }

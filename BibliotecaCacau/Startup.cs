@@ -40,6 +40,7 @@ namespace BibliotecaBookHub
             services.AddScoped<ILivroService, LivroService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IEmprestimoLivroService, EmprestimoLivroService>();
         }
 
         public void AddDependenciesRepositories(IServiceCollection services)
@@ -47,6 +48,7 @@ namespace BibliotecaBookHub
             services.AddScoped<ILivroRepository, LivroRepository>();
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IEmprestimoLivroRepository, EmprestimoLivroRepository>();
 
         }
 

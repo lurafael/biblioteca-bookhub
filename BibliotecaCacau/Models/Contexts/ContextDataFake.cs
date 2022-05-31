@@ -100,6 +100,16 @@ namespace BibliotecaBookHub.Models.Contexts
             throw new NotImplementedException();
         }
 
+        public void EfetuarDevolucaoLivro(EmprestimoLivro emprestimoLivro)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EfetuarEmprestimoLivro(EmprestimoLivro emprestimoLivro)
+        {
+            throw new NotImplementedException();
+        }
+
         public UsuarioDTO EfetuarLogin(UsuarioDTO usuario)
         {
             throw new NotImplementedException();
