@@ -3,6 +3,7 @@ using BibliotecaBookHub.Models.Contracts.Repositories;
 using BibliotecaBookHub.Models.DTO;
 using BibliotecaBookHub.Models.Enums;
 using BibliotecaBookHub.Models.Repositories;
+using BibliotecaCacau.Models.DTO;
 using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -649,6 +650,111 @@ namespace BibliotecaBookHub.Models.Contexts
                 {
                     transaction.Rollback();
                 }
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public List<ConsultaEmprestimoDTO> ConsultarEmprestimos()
+        {
+            var emprestimos = new List<ConsultaEmprestimoDTO>();
+            try
+            {
+                var query = SqlManager.GetSql(TSql.CONSULTAR_EMPRESTIMOS_LIVROS);
+                var command = new SqlCommand(query, _connection);
+                var dataSet = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataSet);
+
+                var rows = dataSet.Tables[0].Rows;
+                foreach (DataRow row in rows)
+                {
+                    var colunas = row.ItemArray;
+                    var emprestimo = new ConsultaEmprestimoDTO
+                    {
+                        Livro = colunas[0].ToString(),
+                        Autor = colunas[1].ToString(),
+                        Editora = colunas[2].ToString(),
+                        Cliente = colunas[3].ToString(),
+                        CPF = colunas[4].ToString(),
+                        DataEmprestimo = DateTime.Parse(colunas[5].ToString()).ToString("dd/MM/yyyy"),
+                        DataDevolucao = DateTime.Parse(colunas[6].ToString()).ToString("dd/MM/yyyy"),
+                        DataDevolucaoEfetiva = colunas[7].ToString(),
+                        StatusLivro = colunas[8].ToString(),
+                        LoginBibliotecario = colunas[9].ToString()
+                    };
+                    
+                    emprestimos.Add(emprestimo);
+                }
+
+                adapter = null;
+                dataSet = null;
+
+                return emprestimos;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo)
+        {
+            ConsultaEmprestimoDTO emprestimo = null;
+
+            try
+            {
+                var query = SqlManager.GetSql(TSql.PESQUISAR_EMPRESTIMOS_LIVROS);
+                var command = new SqlCommand(query, _connection);
+
+                command.Parameters.Add("@nomeLivro", SqlDbType.VarChar).Value = nomeLivro;
+                command.Parameters.Add("@nomeCliente", SqlDbType.VarChar).Value = nomeCliente;
+                command.Parameters.Add("@dataEmprestimo", SqlDbType.DateTime).Value = dataEmprestimo;
+
+                var dataSet = new DataSet();
+                var adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataSet);
+
+                var rows = dataSet.Tables[0].Rows;
+                foreach (DataRow row in rows)
+                {
+                    var colunas = row.ItemArray;
+                    
+                    emprestimo = new ConsultaEmprestimoDTO
+                    {
+                        Livro = colunas[0].ToString(),
+                        Autor = colunas[1].ToString(),
+                        Editora = colunas[2].ToString(),
+                        Cliente = colunas[3].ToString(),
+                        CPF = colunas[4].ToString(),
+                        DataEmprestimo = DateTime.Parse(colunas[5].ToString()).ToString("dd/MM/yyyy"),
+                        DataDevolucao = DateTime.Parse(colunas[6].ToString()).ToString("dd/MM/yyyy"),
+                        DataDevolucaoEfetiva = colunas[7].ToString(),
+                        StatusLivro = colunas[8].ToString(),
+                        LoginBibliotecario = colunas[9].ToString()
+                    };
+                }
+
+                adapter = null;
+                dataSet = null;
+
+                return emprestimo;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
             finally
             {

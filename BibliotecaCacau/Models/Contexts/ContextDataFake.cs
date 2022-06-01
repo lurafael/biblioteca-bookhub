@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts;
 using BibliotecaBookHub.Models.DTO;
+using BibliotecaCacau.Models.DTO;
 using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,11 @@ namespace BibliotecaBookHub.Models.Contexts
             throw new NotImplementedException();
         }
 
+        public List<ConsultaEmprestimoDTO> ConsultarEmprestimos()
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeletarCliente(string id)
         {
             throw new NotImplementedException();
@@ -141,6 +147,11 @@ namespace BibliotecaBookHub.Models.Contexts
         }
 
         public Cliente PesquisarClientePorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo)
         {
             throw new NotImplementedException();
         }

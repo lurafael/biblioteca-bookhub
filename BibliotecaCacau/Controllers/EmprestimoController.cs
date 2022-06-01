@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts.Services;
 using BibliotecaBookHub.Models.DTO;
+using BibliotecaCacau.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,33 @@ namespace BibliotecaBookHub.Controllers
             return View();
         }
 
+        public IActionResult Consulta()
+        {
+            try
+            {
+                var emprestimos = _emprestimoService.ConsultarEmprestimos();
+                return View(emprestimos);
+            } 
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult PesquisarEmprestimo(string nomeLivro, string nomeCliente, string dataEmprestimo)
+        {
+            DateTime dataEmprestimoFormatada = DateTime.Parse(dataEmprestimo);
+            try
+            {
+                ConsultaEmprestimoDTO result = _emprestimoService.PesquisarEmprestimo(nomeLivro, nomeCliente, dataEmprestimoFormatada);
+                return View(result);
+            } 
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult EfetuarEmprestimo([Bind("Cliente, Livro")] EmprestimoDTO emprestimo)
@@ -50,7 +78,7 @@ namespace BibliotecaBookHub.Controllers
 
                 _emprestimoService.EfetuarEmprestimo(entidade);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Consulta");
             }
             catch(Exception ex)
             {

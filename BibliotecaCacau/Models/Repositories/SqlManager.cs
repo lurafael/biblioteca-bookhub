@@ -114,6 +114,45 @@ namespace BibliotecaBookHub.Models.Repositories
                             "SET STATUSLIVROID = @statusLivroId " +
                             "WHERE CONVERT(varchar(36), id) = @id";
                     break;
+                case TSql.CONSULTAR_EMPRESTIMOS_LIVROS:
+                    query = @"SELECT 
+                                L.Nome Livro,
+                                L.Autor,
+	                            L.Editora,
+                                C.Nome Cliente,
+                                C.CPF CPF,
+	                            EL.dataEmprestimo,
+	                            EL.dataDevolucao,
+	                            EL.dataDevolucaoEfetiva,
+	                            SL.status [Status do livro],
+                                U.Login Login
+                            FROM livro L
+                            INNER JOIN emprestimoLivro EL ON EL.livroId = L.Id
+                            INNER JOIN cliente C ON EL.clienteId = C.Id
+                            INNER JOIN statusLivro SL ON L.statusLivroId = SL.Id
+                            INNER JOIN usuario U ON EL.usuarioId = U.Id";
+                    break;
+                case TSql.PESQUISAR_EMPRESTIMOS_LIVROS:
+                    query = @"SELECT 
+                                L.Nome Livro,
+                                L.Autor,
+	                            L.Editora,
+                                C.Nome Cliente,
+                                C.CPF CPF,
+	                            EL.dataEmprestimo,
+	                            EL.dataDevolucao,
+	                            EL.dataDevolucaoEfetiva,
+	                            SL.status [Status do livro],
+                                U.Login Login
+                            FROM livro L
+                            INNER JOIN emprestimoLivro EL ON EL.livroId = L.Id
+                            INNER JOIN cliente C ON EL.clienteId = C.Id
+                            INNER JOIN statusLivro SL ON L.statusLivroId = SL.Id
+                            INNER JOIN usuario U ON EL.usuarioId = U.Id
+                            WHERE 
+	                            L.nome = @nomeLivro AND C.Nome = @nomeCliente AND DATEADD(dd, 0, DATEDIFF(dd, 0, EL.dataEmprestimo)) = @dataEmprestimo";
+                    break;
+                    
                     #endregion
             }
             return query;
