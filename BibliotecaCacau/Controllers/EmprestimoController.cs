@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts.Services;
 using BibliotecaBookHub.Models.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,17 @@ namespace BibliotecaBookHub.Controllers
 {
     public class EmprestimoController : Controller
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IEmprestimoLivroService _emprestimoService;
+        private readonly IClienteService _clienteService;
+        private readonly ILivroService _livroService;
 
-        public EmprestimoController(IUsuarioService usuarioService)
+        public EmprestimoController(IEmprestimoLivroService emprestimoService,
+            IClienteService clienteService,
+            ILivroService livroService)
         {
-            _usuarioService = usuarioService;
+            _emprestimoService = emprestimoService;
+            _clienteService = clienteService;
+            _livroService = livroService;
         }
 
         public IActionResult Index()
@@ -23,40 +30,80 @@ namespace BibliotecaBookHub.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string login, string senha)
+        [ValidateAntiForgeryToken]
+        public IActionResult EfetuarEmprestimo([Bind("Cliente, Livro")] EmprestimoDTO emprestimo)
         {
             try
             {
-                UsuarioDTO usuario = new UsuarioDTO { Login = login, Senha = senha };
-                UsuarioDTO resultado =  _usuarioService.EfetuarLogin(usuario);
+                int userId = Int32.Parse(HttpContext.Session.GetString("_UserId"));
+                string login = HttpContext.Session.GetString("_Login");
 
-                if(resultado != null)
-                {
-                    TempData["userId"] = resultado.Id;
-                    TempData["userLogin"] = resultado.Login;
-                    TempData["loginError"] = false;
+                EmprestimoLivroDTO entidade = new EmprestimoLivroDTO();
+                entidade.Cliente = PesquisarCliente(emprestimo.Cliente);
+                entidade.ClienteId = entidade.Cliente.Id;
 
-                    return Redirect("/Home");
-                } else
-                {
-                    TempData["loginError"] = true;
+                entidade.Livro = PesquisarLivro(emprestimo.Livro);
+                entidade.LivroId = entidade.Livro.Id;
 
-                    return RedirectToAction("Index");
-                }
+                entidade.UsuarioId = userId;
+                entidade.Usuario = new UsuarioDTO { Id = userId, Login = login };
+
+                _emprestimoService.EfetuarEmprestimo(entidade);
+
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw ex;
             }
         }
 
-        public IActionResult Logout()
+        public ClienteDTO PesquisarCliente(string nome)
         {
-            TempData["userId"] = null;
-            TempData["userLogin"] = null;
-            TempData["loginError"] = false;
+            var cliente = _clienteService.Listar()
+                .Where(p => p.Nome
+                .Equals(nome))
+                .FirstOrDefault();
 
-            return RedirectToAction("/Home");
+            return cliente;
+        }
+
+        public LivroDTO PesquisarLivro(string nome)
+        {
+            var livro = _livroService.Listar()
+                .Where(p => p.Nome
+                .Equals(nome))
+                .FirstOrDefault();
+
+            return livro;
+        }
+
+        public LivroDTO PesquisarUsuario(string nome)
+        {
+            var livro = _livroService.Listar()
+                .Where(p => p.Nome
+                .Equals(nome))
+                .FirstOrDefault();
+
+            return livro;
+        }
+
+        public IActionResult PesquisarClientes(string term)
+        {
+            var clientes = _clienteService.Listar();
+            var clientesAtivos = clientes.Where(p => p.StatusClienteId.Equals("1")).ToList();
+            var listaNomeClientes = clientesAtivos.Select(p => p.Nome).ToList();
+            var filtro = listaNomeClientes.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            return Json(filtro);
+        }
+
+        public IActionResult PesquisarLivros(string term)
+        {
+            var livros = _livroService.Listar();
+            var livrosDisponiveis = livros.Where(p => p.StatusLivroId == 1).ToList();
+            var listaLivros = livrosDisponiveis.Select(p => p.Nome).ToList();
+            var filtro = listaLivros.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            return Json(filtro);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace BibliotecaBookHub.Models.DTO
         public ClienteDTO Cliente { get; set; }
         public string LivroId { get; set; }
         public LivroDTO Livro { get; set; }
-        public string UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
         public UsuarioDTO Usuario { get; set; }
         public DateTime DataEmprestimo { get; set; }
         public DateTime DataDevolucao { get; set; }
@@ -27,8 +27,7 @@ namespace BibliotecaBookHub.Models.DTO
                 UsuarioId = UsuarioId,
                 Usuario = Usuario.ConverterParaEntidade(),
                 DataEmprestimo = DataEmprestimo,
-                DataDevolucao = DataDevolucao,
-                DataDevolucaoEfetiva = DataDevolucaoEfetiva,
+                DataDevolucao = DataDevolucao
             };
         }
     }

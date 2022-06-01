@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts.Services;
 using BibliotecaBookHub.Models.DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,8 +33,9 @@ namespace BibliotecaBookHub.Controllers
 
                 if(resultado != null)
                 {
-                    TempData["userId"] = resultado.Id;
-                    TempData["userLogin"] = resultado.Login;
+                    HttpContext.Session.SetString("_UserId", resultado.Id.ToString());
+                    HttpContext.Session.SetString("_Login", resultado.Login);
+
                     TempData["loginError"] = false;
 
                     return Redirect("/Emprestimo/Index");
@@ -52,8 +54,9 @@ namespace BibliotecaBookHub.Controllers
 
         public IActionResult Logout()
         {
-            TempData["userId"] = null;
-            TempData["userLogin"] = null;
+            HttpContext.Session.Remove("_UserId");
+            HttpContext.Session.Remove("_Login");
+
             TempData["loginError"] = false;
 
             return Redirect("/Home");

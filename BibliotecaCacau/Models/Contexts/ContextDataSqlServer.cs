@@ -122,8 +122,10 @@ namespace BibliotecaBookHub.Models.Contexts
                     var nome = colunas[1].ToString();
                     var autor = colunas[2].ToString();
                     var editora = colunas[3].ToString();
+                    var statusLivroId = colunas[4].ToString();
 
-                    var livro = new Livro { Id = id, Nome = nome, Autor = autor, Editora = editora };
+                    var livro = new Livro { Id = id, Nome = nome, Autor = autor, Editora = editora, StatusLivroId = Int32.Parse(statusLivroId) };
+                    livro.StatusLivro = GerenciadorDeStatus.PesquisarStatusDoLivroPeloId(livro.StatusLivroId);
                     livros.Add(livro);
                 }
 
@@ -579,12 +581,14 @@ namespace BibliotecaBookHub.Models.Contexts
                 _connection.Open();
                 transaction = _connection.BeginTransaction();
 
-                var queryEmprestimo = SqlManager.GetSql(TSql.EFETUAR_DEVOLUCAO_LIVRO);
+                var queryEmprestimo = SqlManager.GetSql(TSql.EFETUAR_EMPRESTIMO_LIVRO);
                 var commandEmprestimo = new SqlCommand(queryEmprestimo, _connection, transaction);
 
                 commandEmprestimo.Parameters.Add("@clienteId", SqlDbType.VarChar).Value = emprestimoLivro.ClienteId;
+                commandEmprestimo.Parameters.Add("@usuarioId", SqlDbType.Int).Value = emprestimoLivro.UsuarioId;
                 commandEmprestimo.Parameters.Add("@livroId", SqlDbType.VarChar).Value = emprestimoLivro.LivroId;
-                commandEmprestimo.Parameters.Add("@dataDevolucaoEfetiva", SqlDbType.DateTime).Value = emprestimoLivro.DataDevolucaoEfetiva;
+                commandEmprestimo.Parameters.Add("@dataEmprestimo", SqlDbType.DateTime).Value = emprestimoLivro.DataEmprestimo;
+                commandEmprestimo.Parameters.Add("@dataDevolucao", SqlDbType.DateTime).Value = emprestimoLivro.DataDevolucao;
                 commandEmprestimo.ExecuteNonQuery();
 
                 var queryDevolucao = SqlManager.GetSql(TSql.ATUALIZAR_STATUS_LIVRO);
@@ -620,7 +624,7 @@ namespace BibliotecaBookHub.Models.Contexts
                 _connection.Open();
                 transaction = _connection.BeginTransaction();
 
-                var queryEmprestimo = SqlManager.GetSql(TSql.EFETUAR_EMPRESTIMO_LIVRO);
+                var queryEmprestimo = SqlManager.GetSql(TSql.EFETUAR_DEVOLUCAO_LIVRO);
                 var commandEmprestimo = new SqlCommand(queryEmprestimo, _connection, transaction);
 
                 commandEmprestimo.Parameters.Add("@clienteId", SqlDbType.VarChar).Value = emprestimoLivro.ClienteId;

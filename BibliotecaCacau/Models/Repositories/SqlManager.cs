@@ -21,12 +21,12 @@ namespace BibliotecaBookHub.Models.Repositories
                         "VALUES (CONVERT(BINARY(36), @id), @nome, @autor, @editora, @statusLivroId)";
                     break;
                 case TSql.LISTAR_LIVRO:
-                    query = "SELECT CONVERT(VARCHAR(36), Id) Id, Nome, Autor, Editora " +
+                    query = "SELECT CONVERT(VARCHAR(36), Id) ID, NOME, AUTOR, EDITORA, STATUSLIVROID " +
                             "FROM LIVRO " +
                             "ORDER BY NOME";
                     break;
                 case TSql.PESQUISAR_LIVRO:
-                    query = "SELECT CONVERT(VARCHAR(36), Id) Id, Nome, Autor, Editora " +
+                    query = "SELECT CONVERT(VARCHAR(36), Id) ID, NOME, AUTOR, EDITORA  " +
                             "FROM LIVRO " +
                             "WHERE ID = @id";
                     break;
@@ -101,18 +101,18 @@ namespace BibliotecaBookHub.Models.Repositories
                 #region Empréstimo de Livros
                 case TSql.EFETUAR_EMPRESTIMO_LIVRO:
                     query = "INSERT INTO EMPRESTIMOLIVRO (CLIENTEID, USUARIOID, LIVROID, DATAEMPRESTIMO, DATADEVOLUCAO) " +
-                            "VALUES (@clienteId, @usuarioId, @livroId, @dataEmprestimo, @dataDevolucao)";
+                            "VALUES (CONVERT(BINARY(36), @clienteId), @usuarioId, CONVERT(BINARY(36), @livroId), @dataEmprestimo, @dataDevolucao)";
                     break;
                 case TSql.EFETUAR_DEVOLUCAO_LIVRO:
                     query = "UPDATE EMPRESTIMOLIVRO " +
-                            "SET DATADEVOLUCAOEFETIVA = @DATADEVOLUCAOEFETIVA " +
+                            "SET DATADEVOLUCAOEFETIVA = @dataDevolucaoEfetiva " +
                             "WHERE CLIENTEID = @clienteId and LIVROID = @livroId";
                     break;
                 
                 case TSql.ATUALIZAR_STATUS_LIVRO:
                     query = "UPDATE LIVRO " +
                             "SET STATUSLIVROID = @statusLivroId " +
-                            "WHERE ID = @id";
+                            "WHERE CONVERT(varchar(36), id) = @id";
                     break;
                     #endregion
             }
