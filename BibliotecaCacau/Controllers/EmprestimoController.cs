@@ -32,16 +32,7 @@ namespace BibliotecaBookHub.Controllers
 
         public IActionResult Consulta()
         {
-            try
-            {
-                _emprestimoService.AtualizarStatusEmprestimoLivros();
-                var emprestimos = _emprestimoService.ConsultarEmprestimos();
-                return View(emprestimos);
-            } 
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            return View();
         }
 
         public IActionResult PesquisarEmprestimo(string nomeLivro, string nomeCliente, string dataEmprestimo)

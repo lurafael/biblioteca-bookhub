@@ -10,56 +10,50 @@
     <a asp-action="Index">Novo Empréstimo</a>
 </p>
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Livro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Autor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataEmprestimo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataDevolucao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusLivro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div id="app">
+    <table class="table table-striped table-bordered">
+        <thead>
             <tr>
+                <th>Livro</th>
+                <th>Autor</th>
+                <th>Cliente</th>
+                <th>DataEmprestimo</th>
+                <th>DataDevolucao</th>
+                <th>Status do livro</th>
+                <th>Gerenciamento</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(data, index) in info">
+                <td>{{data.Livro}}</td>
+                <td>{{data.Autor}}</td>
+                <td>{{data.Cliente}}</td>
+                <td>{{data.DataEmprestimo}}</td>
+                <td>{{data.DataDevolucao}}</td>
+                <td>{{data.StatusLivro}}</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Livro)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Autor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cliente)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataEmprestimo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataDevolucao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StatusLivro)
-                </td>
-                <td>
-                    @Html.ActionLink("Detalhes", "PesquisarEmprestimo", new { nomeLivro = item.Livro, nomeCliente = item.Cliente, dataEmprestimo = item.DataEmprestimo })
+                    @*@Html.ActionLink("Detalhes", "PesquisarEmprestimo", new { nomeLivro = {{data.Livro}}, nomeCliente = item.Cliente, dataEmprestimo = item.DataEmprestimo })*@ 
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
+
+@section scripts {
+
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    info: null
+                }
+            },
+            mounted() {
+                axios
+                    .get('/api/Emprestimo/ConsultarEmprestimo')
+                    .then(response => (this.info = response.data))
+            }
+        })
+    </script>
+}

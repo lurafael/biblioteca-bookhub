@@ -34,14 +34,13 @@
                     @if (login != null)
                     {
                         <a>
-                            @Html.ActionLink("Editar", "Edit") |
-                            @Html.ActionLink("Detalhes", "Details") |
-                            @Html.ActionLink("Exclusão", "Delete")
+                            @Html.ActionLink("Editar", "Edit", new { }, new { @class = "edit" }) |
+                            @Html.ActionLink("Detalhes", "Details", new { }, new { @class = "details" }) |
+                            @Html.ActionLink("Exclusão", "Delete", new { }, new { @class = "delete" })
                         </a>
                     }
                 </td>
             </tr>
-
         </tbody>
     </table>
 </div>

@@ -12,11 +12,11 @@ namespace BibliotecaCacau.Controllers.APIs
 {
     [Route("api/Livro")]
     [ApiController]
-    public class ObterLivrosApiController : ControllerBase
+    public class LivrosApiController : ControllerBase
     {
         private readonly ILivroService _livroService;
 
-        public ObterLivrosApiController(ILivroService livroService)
+        public LivrosApiController(ILivroService livroService)
         {
             _livroService = livroService;
         }
