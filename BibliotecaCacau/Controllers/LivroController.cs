@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace BibliotecaBookHub.Controllers
@@ -24,15 +25,7 @@ namespace BibliotecaBookHub.Controllers
 
         public IActionResult List()
         {
-            try
-            {
-                var livros = _livroService.Listar();
-                return View(livros);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return View();
         }
 
         public IActionResult Create()
