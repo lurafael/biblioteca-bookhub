@@ -58,7 +58,7 @@ namespace BibliotecaBookHub.Models.Repositories
                     break;
                 case TSql.ATUALIZAR_CLIENTE:
                     query = "UPDATE CLIENTE " +
-                            "SET NOME = @nome, CPF = @cpf, EMAIL = @email, FONE = @email " +
+                            "SET NOME = @nome, CPF = @cpf, EMAIL = @email, FONE = @fone " +
                             "WHERE CONVERT(VARCHAR(36), Id) = @id";
                     break;
                 case TSql.EXCLUIR_CLIENTE:

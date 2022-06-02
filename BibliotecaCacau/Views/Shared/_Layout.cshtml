@@ -25,37 +25,37 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    @{
-                        string login = Context.Session.GetString("_Login");
-                        if (login != null)
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Livro" asp-action="List">Livros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="List">Clientes</a>
-                        </li>
+                        @{
+                            string login = Context.Session.GetString("_Login");
+                            if (login != null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Livro" asp-action="List">Livros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="List">Clientes</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Emprestimo" asp-action="Consulta">Empréstimo</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Emprestimo" asp-action="Consulta">Empréstimo</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark">Usuário: @login</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark">Usuário: @login</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white btn btn-danger" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white btn btn-danger" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
+                                </li>
+                            }
+
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Login</a>
+                                </li>
+                            }
                         }
-
-                        else
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Login</a>
-                        </li>
-                        }
-                    }
                     </ul>
                 </div>
             </div>
@@ -75,6 +75,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
