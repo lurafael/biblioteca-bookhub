@@ -13,11 +13,16 @@ namespace BibliotecaBookHub.Models.DTO
         public string StatusClienteId { get; set; }
         public string Status { get; set; }
 
+        public ClienteDTO()
+        {
+        }
+
         public Cliente ConverterParaEntidade()
         {
             return new Cliente
             {
-                Id = Id, 
+                Id = Id,
+                Cpf = Cpf,
                 Nome = Nome, 
                 Email = Email,
                 Fone = Fone,

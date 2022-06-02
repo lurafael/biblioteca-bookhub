@@ -1,5 +1,6 @@
 ﻿using BibliotecaBookHub.Models.Contracts;
 using BibliotecaBookHub.Models.DTO;
+using BibliotecaCacau.Models.DTO;
 using BibliotecaCacau.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,16 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public void AtualizarStatusEmprestimoLivros()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AtualizarUsuario(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CadastrarCliente(Cliente cliente)
         {
             throw new NotImplementedException();
@@ -65,6 +76,16 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void CadastrarUsuario(Usuario usuario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ConsultaEmprestimoDTO> ConsultarEmprestimos()
+        {
+            throw new NotImplementedException();
         }
 
         public void DeletarCliente(string id)
@@ -83,6 +104,26 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public void DeletarUsuario(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EfetuarDevolucaoLivro(int emprestimoId, string livroId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EfetuarEmprestimoLivro(EmprestimoLivro emprestimoLivro)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UsuarioDTO EfetuarLogin(UsuarioDTO usuario)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Cliente> ListarClientes()
@@ -105,7 +146,17 @@ namespace BibliotecaBookHub.Models.Contexts
 
         }
 
+        public List<Usuario> ListarUsuarios()
+        {
+            throw new NotImplementedException();
+        }
+
         public Cliente PesquisarClientePorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo)
         {
             throw new NotImplementedException();
         }
@@ -120,6 +171,11 @@ namespace BibliotecaBookHub.Models.Contexts
             {
                 throw ex;
             }
+        }
+
+        public Usuario PesquisarUsuarioPorId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

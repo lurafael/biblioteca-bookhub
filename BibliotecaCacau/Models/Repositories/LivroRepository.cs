@@ -22,9 +22,9 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
             _contextData.CadastrarLivro(livro);
         }
 
-        public void Deletar(Livro livro)
+        public void Deletar(string Id)
         {
-            _contextData.DeletarLivro(livro.Id);
+            _contextData.DeletarLivro(Id);
         }
 
         public List<Livro> Listar()

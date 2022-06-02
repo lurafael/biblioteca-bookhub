@@ -358,3 +358,13 @@ C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\BibliotecaCac
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\BibliotecaCacau.dll
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\BibliotecaCacau.pdb
 C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\BibliotecaCacau.genruntimeconfig.cache
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Index.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\List.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Edit.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Create.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Details.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Delete.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Emprestimo\Index.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Emprestimo\Consulta.cshtml.g.cs
+C:\github\biblioteca-cacau\BibliotecaCacau\obj\Debug\netcoreapp3.1\Razor\Views\Emprestimo\PesquisarEmprestimo.cshtml.g.cs

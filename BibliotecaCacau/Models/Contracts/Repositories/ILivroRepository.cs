@@ -4,12 +4,7 @@ using System.Collections.Generic;
 
 namespace BibliotecaBookHub.Models.Contracts.Repositories
 {
-    public interface ILivroRepository
+    public interface ILivroRepository : IRepository<Livro, string>
     {
-        void Cadastrar(Livro livro);
-        List<Livro> Listar();
-        Livro PesquisarPorId(string id);
-        void Atualizar(Livro livro);
-        void Deletar(Livro livro);
     }
 }

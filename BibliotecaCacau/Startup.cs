@@ -27,13 +27,42 @@ namespace BibliotecaBookHub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            ConfigureApp(services);
 
-
-            services.AddScoped<ILivroRepository, LivroRepository>();
-            services.AddScoped<ILivroService, LivroService>();
+            AddDependenciesRepositories(services);
+            AddDependenciesServices(services);
 
             ConfigureDataSource(services);
+        }
+
+        public void ConfigureApp(IServiceCollection services)
+        {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+        }
+
+        public void AddDependenciesServices(IServiceCollection services)
+        {
+            services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IEmprestimoLivroService, EmprestimoLivroService>();
+        }
+
+        public void AddDependenciesRepositories(IServiceCollection services)
+        {
+            services.AddScoped<ILivroRepository, LivroRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IEmprestimoLivroRepository, EmprestimoLivroRepository>();
+
         }
 
         public void ConfigureDataSource(IServiceCollection services)
@@ -69,6 +98,8 @@ namespace BibliotecaBookHub
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

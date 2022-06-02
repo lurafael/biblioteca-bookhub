@@ -129,7 +129,7 @@ namespace BibliotecaBookHub.Controllers
         {
             try
             {
-                _livroService.Deletar(livro);
+                _livroService.Deletar(livro.Id);
                 return RedirectToAction("List");
             }
             catch (Exception ex)
