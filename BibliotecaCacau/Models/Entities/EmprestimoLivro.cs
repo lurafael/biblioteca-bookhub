@@ -8,6 +8,7 @@ namespace BibliotecaCacau.Models.Entities
 {
     public class EmprestimoLivro
     {
+        public int Id { get; set; }
         public string ClienteId { get; set; }
         public Cliente Cliente { get; set; }
         public string LivroId { get; set; }

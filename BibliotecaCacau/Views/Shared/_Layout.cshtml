@@ -25,6 +25,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                    @{
+                        string login = Context.Session.GetString("_Login");
+                        if (login != null)
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Livro" asp-action="List">Livros</a>
                         </li>
@@ -32,20 +36,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="List">Clientes</a>
                         </li>
 
-                        @{
-                        var login = Context.Session.GetString("_Login");
-                        if (login != null)
-                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Emprestimo" asp-action="Consulta">Empréstimo</a>
                         </li>
 
                         <li class="nav-item">
-                            <p class="nav-link text-dark">Usuário: @login</p>
+                            <a class="nav-link text-dark">Usuário: @login</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
+                            <a class="nav-link text-white btn btn-danger" asp-area="" asp-controller="Usuario" asp-action="Logout">Logout</a>
                         </li>
                         }
 
@@ -55,7 +55,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Login</a>
                         </li>
                         }
-                        }
+                    }
                     </ul>
                 </div>
             </div>

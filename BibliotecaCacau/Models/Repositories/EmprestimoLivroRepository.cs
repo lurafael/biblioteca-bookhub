@@ -14,14 +14,19 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
             _contextData = contextData;
         }
 
+        public void AtualizarStatusEmprestimoLivros()
+        {
+            _contextData.AtualizarStatusEmprestimoLivros();
+        }
+
         public List<ConsultaEmprestimoDTO> ConsultarEmprestimos()
         {
             return _contextData.ConsultarEmprestimos();
         }
 
-        public void EfetuarDevolucao(EmprestimoLivro emprestimoLivro)
+        public void EfetuarDevolucao(int emprestimoId, string livroId)
         {
-            _contextData.EfetuarDevolucaoLivro(emprestimoLivro);
+            _contextData.EfetuarDevolucaoLivro(emprestimoId, livroId);
         }
 
         public void EfetuarEmprestimo(EmprestimoLivro emprestimoLivro)

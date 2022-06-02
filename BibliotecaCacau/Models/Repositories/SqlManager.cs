@@ -97,8 +97,7 @@ namespace BibliotecaBookHub.Models.Repositories
                     break;
                 #endregion
 
-
-                #region Empréstimo de Livros
+                #region EMPRESTIMO DE LIVROS
                 case TSql.EFETUAR_EMPRESTIMO_LIVRO:
                     query = "INSERT INTO EMPRESTIMOLIVRO (CLIENTEID, USUARIOID, LIVROID, DATAEMPRESTIMO, DATADEVOLUCAO) " +
                             "VALUES (CONVERT(BINARY(36), @clienteId), @usuarioId, CONVERT(BINARY(36), @livroId), @dataEmprestimo, @dataDevolucao)";
@@ -106,7 +105,7 @@ namespace BibliotecaBookHub.Models.Repositories
                 case TSql.EFETUAR_DEVOLUCAO_LIVRO:
                     query = "UPDATE EMPRESTIMOLIVRO " +
                             "SET DATADEVOLUCAOEFETIVA = @dataDevolucaoEfetiva " +
-                            "WHERE CLIENTEID = @clienteId and LIVROID = @livroId";
+                            "WHERE ID = @id";
                     break;
                 
                 case TSql.ATUALIZAR_STATUS_LIVRO:
@@ -125,12 +124,16 @@ namespace BibliotecaBookHub.Models.Repositories
 	                            EL.dataDevolucao,
 	                            EL.dataDevolucaoEfetiva,
 	                            SL.status [Status do livro],
-                                U.Login Login
+                                U.Login Login,
+                                EL.Id,
+                                CONVERT(VARCHAR(36), L.Id) livroId
                             FROM livro L
                             INNER JOIN emprestimoLivro EL ON EL.livroId = L.Id
                             INNER JOIN cliente C ON EL.clienteId = C.Id
                             INNER JOIN statusLivro SL ON L.statusLivroId = SL.Id
-                            INNER JOIN usuario U ON EL.usuarioId = U.Id";
+                            INNER JOIN usuario U ON EL.usuarioId = U.Id
+                            ORDER BY
+                                EL.dataEmprestimo DESC";
                     break;
                 case TSql.PESQUISAR_EMPRESTIMOS_LIVROS:
                     query = @"SELECT 
@@ -143,7 +146,9 @@ namespace BibliotecaBookHub.Models.Repositories
 	                            EL.dataDevolucao,
 	                            EL.dataDevolucaoEfetiva,
 	                            SL.status [Status do livro],
-                                U.Login Login
+                                U.Login Login,
+                                EL.Id,
+                                CONVERT(VARCHAR(36), L.Id) livroId
                             FROM livro L
                             INNER JOIN emprestimoLivro EL ON EL.livroId = L.Id
                             INNER JOIN cliente C ON EL.clienteId = C.Id
@@ -152,7 +157,10 @@ namespace BibliotecaBookHub.Models.Repositories
                             WHERE 
 	                            L.nome = @nomeLivro AND C.Nome = @nomeCliente AND DATEADD(dd, 0, DATEDIFF(dd, 0, EL.dataEmprestimo)) = @dataEmprestimo";
                     break;
-                    
+
+                case TSql.ATUALIZAR_STATUS_EMPRESTIMOS_LIVROS:
+                    query = "SP_ATUALIZA_STATUS_EMPRESTIMO_LIVROS";
+                    break;
                     #endregion
             }
             return query;

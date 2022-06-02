@@ -297,8 +297,8 @@ namespace BibliotecaBookHub.Models.Contexts
                     var id = colunas[0].ToString();
                     var nome = colunas[1].ToString();
                     var cpf = colunas[2].ToString();
-                    var fone = colunas[3].ToString();
-                    var email = colunas[4].ToString();
+                    var email = colunas[3].ToString();
+                    var fone = colunas[4].ToString();
                     var statusClienteId = colunas[5].ToString();
 
                     var cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, Email = email, StatusClienteId = Int32.Parse(statusClienteId) };
@@ -345,8 +345,8 @@ namespace BibliotecaBookHub.Models.Contexts
                     var codigo = colunas[0].ToString();
                     var nome = colunas[1].ToString();
                     var cpf = colunas[2].ToString();
-                    var fone = colunas[3].ToString();
-                    var email = colunas[4].ToString();
+                    var email = colunas[3].ToString();
+                    var fone = colunas[4].ToString();
                     var statusClienteId = colunas[5].ToString();
 
                     cliente = new Cliente { Id = id, Nome = nome, Cpf = cpf, Fone = fone, Email = email, StatusClienteId = Int32.Parse(statusClienteId) };
@@ -596,7 +596,7 @@ namespace BibliotecaBookHub.Models.Contexts
                 var commandDevolucao = new SqlCommand(queryDevolucao, _connection, transaction);
 
                 commandDevolucao.Parameters.Add("@id", SqlDbType.VarChar).Value = emprestimoLivro.LivroId;
-                commandDevolucao.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = StatusLivro.DISPONIVEL.GetHashCode();
+                commandDevolucao.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = StatusLivro.EMPRESTADO.GetHashCode();
                 commandDevolucao.ExecuteNonQuery();
 
                 transaction.Commit();
@@ -617,7 +617,7 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
-        public void EfetuarDevolucaoLivro(EmprestimoLivro emprestimoLivro)
+        public void EfetuarDevolucaoLivro(int emprestimoId, string livroId)
         {
             SqlTransaction transaction = null;
             try
@@ -628,18 +628,15 @@ namespace BibliotecaBookHub.Models.Contexts
                 var queryEmprestimo = SqlManager.GetSql(TSql.EFETUAR_DEVOLUCAO_LIVRO);
                 var commandEmprestimo = new SqlCommand(queryEmprestimo, _connection, transaction);
 
-                commandEmprestimo.Parameters.Add("@clienteId", SqlDbType.VarChar).Value = emprestimoLivro.ClienteId;
-                commandEmprestimo.Parameters.Add("@usuarioId", SqlDbType.Int).Value = emprestimoLivro.UsuarioId;
-                commandEmprestimo.Parameters.Add("@livroId", SqlDbType.VarChar).Value = emprestimoLivro.LivroId;
-                commandEmprestimo.Parameters.Add("@dataEmprestimo", SqlDbType.VarChar).Value = emprestimoLivro.DataEmprestimo;
-                commandEmprestimo.Parameters.Add("@dataDevolucao", SqlDbType.VarChar).Value = emprestimoLivro.DataDevolucao;
+                commandEmprestimo.Parameters.Add("@id", SqlDbType.Int).Value = emprestimoId;
+                commandEmprestimo.Parameters.Add("@dataDevolucaoEfetiva", SqlDbType.DateTime).Value = DateTime.Now;
                 commandEmprestimo.ExecuteNonQuery();
 
                 var queryDevolucao = SqlManager.GetSql(TSql.ATUALIZAR_STATUS_LIVRO);
                 var commandDevolucao = new SqlCommand(queryDevolucao, _connection, transaction);
 
-                commandDevolucao.Parameters.Add("@id", SqlDbType.VarChar).Value = emprestimoLivro.LivroId;
-                commandDevolucao.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = StatusLivro.EMPRESTADO.GetHashCode();
+                commandDevolucao.Parameters.Add("@id", SqlDbType.VarChar).Value = livroId;
+                commandDevolucao.Parameters.Add("@statusLivroId", SqlDbType.Int).Value = StatusLivro.DISPONIVEL.GetHashCode();
                 commandDevolucao.ExecuteNonQuery();
 
                 transaction.Commit();
@@ -686,7 +683,9 @@ namespace BibliotecaBookHub.Models.Contexts
                         DataDevolucao = DateTime.Parse(colunas[6].ToString()).ToString("dd/MM/yyyy"),
                         DataDevolucaoEfetiva = colunas[7].ToString(),
                         StatusLivro = colunas[8].ToString(),
-                        LoginBibliotecario = colunas[9].ToString()
+                        LoginBibliotecario = colunas[9].ToString(),
+                        Id = Int32.Parse(colunas[10].ToString()),
+                        LivroId = colunas[11].ToString()
                     };
                     
                     emprestimos.Add(emprestimo);
@@ -743,7 +742,9 @@ namespace BibliotecaBookHub.Models.Contexts
                         DataDevolucao = DateTime.Parse(colunas[6].ToString()).ToString("dd/MM/yyyy"),
                         DataDevolucaoEfetiva = colunas[7].ToString(),
                         StatusLivro = colunas[8].ToString(),
-                        LoginBibliotecario = colunas[9].ToString()
+                        LoginBibliotecario = colunas[9].ToString(),
+                        Id = Int32.Parse(colunas[10].ToString()),
+                        LivroId = colunas[11].ToString()
                     };
                 }
 
@@ -751,6 +752,31 @@ namespace BibliotecaBookHub.Models.Contexts
                 dataSet = null;
 
                 return emprestimo;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (_connection.State == ConnectionState.Open)
+                {
+                    _connection.Close();
+                }
+            }
+        }
+
+        public void AtualizarStatusEmprestimoLivros()
+        {
+            try
+            {
+                string proc = SqlManager.GetSql(TSql.ATUALIZAR_STATUS_EMPRESTIMOS_LIVROS);
+
+                _connection.Open();
+                var command = new SqlCommand(proc, _connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.ExecuteNonQuery();
+                command = null;
             }
             catch (Exception e)
             {

@@ -125,7 +125,7 @@ namespace BibliotecaBookHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([Bind("Nome, Cpf, Email, Fone")] ClienteDTO cliente)
+        public IActionResult Delete([Bind("Id, Nome, Cpf, Email, Fone")] ClienteDTO cliente)
         {
             try
             {

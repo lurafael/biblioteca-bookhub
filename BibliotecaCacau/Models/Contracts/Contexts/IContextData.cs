@@ -37,9 +37,10 @@ namespace BibliotecaBookHub.Models.Contracts
 
         #region Empréstimo
         void EfetuarEmprestimoLivro(EmprestimoLivro emprestimoLivro);
-        void EfetuarDevolucaoLivro(EmprestimoLivro emprestimoLivro);
+        void EfetuarDevolucaoLivro(int emprestimoId, string livroId);
         List<ConsultaEmprestimoDTO> ConsultarEmprestimos();
         ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo);
+        void AtualizarStatusEmprestimoLivros();
         #endregion
     }
 }

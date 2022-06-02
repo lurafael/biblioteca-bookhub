@@ -34,6 +34,7 @@ namespace BibliotecaBookHub.Controllers
         {
             try
             {
+                _emprestimoService.AtualizarStatusEmprestimoLivros();
                 var emprestimos = _emprestimoService.ConsultarEmprestimos();
                 return View(emprestimos);
             } 
@@ -81,6 +82,19 @@ namespace BibliotecaBookHub.Controllers
                 return RedirectToAction("Consulta");
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IActionResult EfetuarDevolucao(int emprestimoId, string livroId)
+        {
+            try
+            {
+                _emprestimoService.EfetuarDevolucao(emprestimoId, livroId);
+                return RedirectToAction("Consulta");
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

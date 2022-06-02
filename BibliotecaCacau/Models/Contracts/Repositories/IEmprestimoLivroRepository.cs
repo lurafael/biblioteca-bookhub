@@ -9,8 +9,9 @@ namespace BibliotecaBookHub.Models.Contracts.Repositories
     public interface IEmprestimoLivroRepository
     {
         void EfetuarEmprestimo(EmprestimoLivro emprestimoLivro);
-        void EfetuarDevolucao(EmprestimoLivro emprestimoLivro);
+        void EfetuarDevolucao(int emprestimoId, string livroId);
         List<ConsultaEmprestimoDTO> ConsultarEmprestimos();
         ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo);
+        void AtualizarStatusEmprestimoLivros();
     }
 }

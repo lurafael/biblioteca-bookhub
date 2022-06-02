@@ -51,6 +51,11 @@ namespace BibliotecaBookHub.Models.Contexts
             }
         }
 
+        public void AtualizarStatusEmprestimoLivros()
+        {
+            throw new NotImplementedException();
+        }
+
         public void AtualizarUsuario(Usuario usuario)
         {
             throw new NotImplementedException();
@@ -106,7 +111,7 @@ namespace BibliotecaBookHub.Models.Contexts
             throw new NotImplementedException();
         }
 
-        public void EfetuarDevolucaoLivro(EmprestimoLivro emprestimoLivro)
+        public void EfetuarDevolucaoLivro(int emprestimoId, string livroId)
         {
             throw new NotImplementedException();
         }

@@ -16,12 +16,11 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         }
 
 
-        public void EfetuarDevolucao(EmprestimoLivroDTO emprestimoLivro)
+        public void EfetuarDevolucao(int emprestimoId, string livroId)
         {
             try
             {
-                var entidade = emprestimoLivro.ConverterParaEntidade();
-                _emprestimoLivroRepository.EfetuarDevolucao(entidade);
+                _emprestimoLivroRepository.EfetuarDevolucao(emprestimoId, livroId);
             }
             catch (Exception ex)
             {
@@ -50,6 +49,11 @@ namespace BibliotecaBookHub.Models.Contracts.Services
         public ConsultaEmprestimoDTO PesquisarEmprestimo(string nomeLivro, string nomeCliente, DateTime dataEmprestimo)
         {
             return _emprestimoLivroRepository.PesquisarEmprestimo(nomeLivro, nomeCliente, dataEmprestimo);
+        }
+
+        public void AtualizarStatusEmprestimoLivros()
+        {
+            _emprestimoLivroRepository.AtualizarStatusEmprestimoLivros();
         }
     }
 }
